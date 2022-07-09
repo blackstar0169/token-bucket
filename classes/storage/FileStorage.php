@@ -81,7 +81,9 @@ final class FileStorage implements Storage, GlobalScope
     
     public function bootstrap($microtime)
     {
-        $this->open(); // remove() could have deleted the file.
+        if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
+            $this->open(); // remove() could have deleted the file.
+        }
         $this->setMicrotime($microtime);
     }
     
